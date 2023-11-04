@@ -1,0 +1,306 @@
+---------------------------------------------------------------------------------------------------------------------------------------
+VOTER'S TABLE  AND INSERTION IN VOTER'S TABLE
+
+create table voters
+(
+V_Id varchar2(6) primary key,
+V_Fullname varchar2(10), 
+V_Dob date,
+V_Age int check(V_Age >= 18),
+V_Fathers_Name varchar2(8),
+V_Location varchar2(7), 
+V_Gender varchar2(1), 
+Registration_Date date,
+Issued_Date date
+);
+
+desc voters;
+
+
+insert into voters values('UT0128','Ram Singh','07/Sep/1999',22,'Manohar','Pune','M','02/Nov/2017','20/Dec/2017');
+insert into voters values('UT4536','Sham Satre','14/Feb/1972',50,'Pyare','Goa','M','08/May/1990','20/Aug/1990');
+insert into voters values('GS2345','Munna Bhai','28/Jul/1963',59,'Gajodhar','Chembur','M','25/Oct/1981','09/Nov/1982');
+insert into voters values('DF5678','Pyare Lal','22/Apr/2000',22,'Vihan','Vashi','M','07/Jun/2019','01/Jan/2020');
+insert into voters values('KL2309','Ratan Tata','09/Dec/1952',69,'Sai','Sion','M','17/Dec/1970','17/Mar/1971');
+insert into voters values('BN3729','Lalit Modi','31/Aug/1973',48,'Arjun','Panvel','M','21/Sep/1991','26/Dec/1991');
+insert into voters values('XZ2098','Nana Patel','28/Feb/2001',21,'Krishna','Noida','M','05/May/2019','30/Jul/2019');
+insert into voters values('BM2391','Meena Koi','17/Oct/1969',52,'Raju','Kerala','F','23/Jun/1987','09/Aug/1987');
+insert into voters values('MS2098','Shanti Das','1/Jan/1977',45,'Shlok','Sikkim','F','27/Mar/1995','23/Jul/1995');
+insert into voters values('KL2630','Binod Pal','21/Apr/1983',39,'Kabir','Jammu','M','15/May/2001','23/Sep/2001');
+insert into voters values('VC2638','Shami Pane','25/Sep/1991',30,'Atharv','U.P','F','09/Sep/2009','09/Oct/2009');
+insert into voters values('PO2912','Hir Sukhoi','11/Mar/2002',20,'Madhav','Nepal','F','15/May/2020','26/Aug/2020');
+
+select * from voters;
+
+---------------------------------------------------------------------------------------------------------------------------------------
+VOTER'S DOCS AND INSERTION IN V_DOCS
+
+
+create table V_Docs
+(
+V_Id varchar2(6),
+constraint fk
+foreign key(V_Id) references voters(V_Id),
+Aadhar_No varchar2(12) NOT NULL,
+Pan_No varchar2(10) unique, 
+Mob_No int check(length(Mob_No)=10)
+);
+
+desc v_docs;
+
+insert into V_docs values('UT0128',876543234566,'GQUPT9876K',9655679052);
+insert into V_docs values('UT4536',445678909877,'KWNHU9751L',7856985485);
+insert into V_docs values('GS2345',657654158931,'MSTAK9856R',9148784655);
+insert into V_docs values('DF5678',478569854851,'IOUTR8563M',9867384648);
+insert into V_docs values('KL2309',937458693871,'UEIDW5872V',9026493021);
+insert into V_docs values('BN3729',354479268985,'KMNLW8795Q',8897362512);
+insert into V_docs values('XZ2098',897633834145,'MNVCD2152P',9856321709);
+insert into V_docs values('BM2391',478587541585,'NMCIG2183L',9876544562);
+insert into V_docs values('MS2098',147586895298,'CXFHR0926D',9087648292);
+insert into V_docs values('KL2630',598765234567,'MBCFF5678O',9833496521);
+insert into V_docs values('VC2638',146798713565,'NBVJU9086Y',9862148692);
+insert into V_docs values('PO2912',169675483297,'MNSGI6789K',8871628984);
+
+select * from v_docs;
+---------------------------------------------------------------------------------------------------------------------------------------
+VOTERS IDENTITY PROOF AND INSERTION IN VOTERS IDENTITY PROOF
+
+create table V_Proof
+(
+V_Id varchar2(6),
+constraint ffk
+foreign key(V_Id) references voters(V_Id),
+Driving_License varchar2(8) unique, 
+Birth_Certificate varchar2(10) NOT NULL,
+Eligibility_fcy varchar2(1)
+);
+
+desc v_proof;
+
+
+insert into v_proof values('UT0128','MH9641','DK297S1WST','Q');
+insert into v_proof values('UT4536','GA5982','BNX8521SYH','E');
+insert into v_proof values('GS2345','MH1290','MN896321UY','R');
+insert into v_proof values('DF5678','MH2309','PI532658VG','M');
+insert into v_proof values('KL2309','MH7865','TYH1263115','S');
+insert into v_proof values('BN3729','MH3098','UI893256TD','E');
+insert into v_proof values('XZ2098','MH4672','RT10236985','S');
+insert into v_proof values('BM2391','UP1678','ER537925JD','E');
+insert into v_proof values('MS2098','KL1563','MN12694CGT','S');
+insert into v_proof values('KL2630','SK8753','PLH6704NIK','R');
+insert into v_proof values('VC2638','JK9056','MNV97GF54K','S');
+insert into v_proof values('PO2912','UP5768','BNV1203652','M');
+
+select * from v_proof;
+---------------------------------------------------------------------------------------------------------------------------------------
+VOTER'S DEATH RECORD AND INSERTION IN VOTERS DEATH INFO TABLE
+
+create table V_death
+(
+V_Id varchar2(6),
+constraint fffk
+foreign key(V_Id) references voters(V_Id),
+V_Fullname varchar2(10),
+Death_Certificate_NO varchar2(10) NOT NULL,
+Date_of_death date
+);
+
+desc v_death;
+
+insert into v_death values('UT4536','Sham Satre','TEHKD96324','20/May/2022');
+insert into v_death values('BM2391','Meena Koi','WRTYE23456','05/Jan/2022');
+insert into v_death values('BN3729','Lalit Modi','CVXJSI3456','25/Aug/2022');
+
+select * from v_death;
+
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+
+VIEW ON EDITING THE EXISTING VOTERS LIST
+
+create view edit_voters
+as select v.V_Id, v.V_Fullname, v.V_Fathers_Name, v.V_Location, vd.Mob_No
+from voters v, v_docs vd
+where v.v_id=vd.v_id;
+
+select * from edit_voters;
+---------------------------------------------------------------------------------------------------------------------------------------
+VIEW ON NEW REGISTRATION 
+
+create view new_voters
+as select v.V_Fullname,v.V_DOB, v.V_Fathers_Name, v.V_Location,v.V_Gender,v.Registration_Date,vp.Driving_License,vp.Birth_Certificate,vd.Aadhar_No,vd.Pan_No,vd.Mob_No
+from voters v, v_proof vp,v_docs vd
+where v.V_Id=vp.V_Id and v.V_Id=vd.V_id;
+
+select * from new_voters;
+---------------------------------------------------------------------------------------------------------------------------------------
+
+VIEW IN INCASE OF DEATH
+
+create view death_voters
+as select v.V_Id, v.V_Fullname, vdd.Death_Certificate_NO
+from voters v, V_death vdd
+where v.V_Id=vdd.V_Id;
+
+select * from death_voters;
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SUBQUERIES
+
+How many registration we got in one particular year::::::::::::::::::::::::
+select count(v_id),extract(year from registration_date) from voters
+where registration_date>='23/jun/1987'
+group by extract(year from registration_date);
+
+Highest No.of registration in a year:::::::::::::::::::::
+Select count , year from (select count(V_Id) count, extract(year from max(registration_date))year
+from voters group by extract (year from registration_date)having count(V_Id)>1);
+
+Gap between Registration date and Issued date::::::::::::::::::::::::::: 
+Select MONTHS_BETWEEN(issued_date, registration_date)from voters;
+
+------------------------------------------------------------------------------------------------------------------------------------
+QUERIES
+
+EDIT IN EXISTING LIST
+select * from voters;
+select * from edit_voters;
+
+select * from edit_voters
+where v_id='UT0128';
+
+update voters
+set V_Location='Punjab'
+where v_Id='UT0128';
+select * from edit_voters;
+
+SIMPLE JOIN
+select v_fullname, v_age, aadhar_no, pan_no
+from voters v, v_docs vv
+where v.v_id = vv.v_id;
+
+ALIAS NAME- cartesian join
+select a.v_fullname, b.Driving_License
+from V_Proof b, voters a;
+
+INSERTION OF NEW REGISTRATION 
+
+insert into voters values()
+insert into v_proof()
+insert into v_docs()
+
+
+DELETE AND EXISTING VOTER
+
+select * from voters;
+select * from death_voters;
+delete from voters
+where v_id='UT4536';
+select * from death_voters;
+select * from voters;
+
+
+Which state had the maximum registration by seeing their driving license first 2 letters
+select substr(driving_license,1,2) as alpha, count(*)
+from v_proof
+group by substr(driving_license,1,2);
+
+
+No. of deaths in the current year using sysdate
+select extract(year from date_of_death),count(*) from v_death
+where extract(year from date_of_death) = (select extract(year from sysdate) from dual)
+group by extract(year from date_of_death);
+
+How many people are eligible for voting and have expired
+select vp.v_id, vp.eligibility_fcy, v.v_fullname
+from voters v, v_proof vp
+where v.v_id = vp.v_id and (vp.eligibility_fcy like 'E' or vp.eligibility_fcy like 'S');
+
+Check Constraint of Mob No
+insert into V_docs values('UT1345',876545670966,'GLUPT9876K',90986790525);
+
+Who was the lastest person who apply for electrol process
+select * from voters
+where rownum <= 1
+ORDER BY v_id DESC;
+
+--------------------------------------------------------------------------------------------------------------------------------------
+PL/SQL Age Tier
+select 
+  case 
+   when v_age between 56 and 100 then 'Senior Citizen (56-100)' 
+   when v_age between 25 and 55 then 'Adult (25-55)'
+   when v_age between 18 and 24 then 'Youth (18-24)' 	
+ END,
+ Count(*) from voters
+ group by
+case 
+   when v_age between 56 and 100 then 'Senior Citizen (56-100)' 	 
+   when v_age between 25 and 55 then 'Adult (25-55)'
+   when v_age between 18 and 24 then 'Youth (18-24)' 
+end;
+
+PL/SQL Pan No with 4th letter representing the status of the person
+set serveroutput on;
+select substr(pan_no,4,1) as alpha, count(*)
+from v_docs
+group by substr(pan_no,4,1);
+begin
+dbms_output.put_line('C-Company');
+dbms_output.put_line('P-Individual');
+dbms_output.put_line('H-HUF');
+dbms_output.put_line('F-Firm');
+dbms_output.put_line('A-Association of Persons');
+dbms_output.put_line('L-Local Authority');
+dbms_output.put_line('J-Artificial Judicial Person');
+dbms_output.put_line('G-Government');
+end;
+/
+
+PL/SQL Ratio of Male to female voters according to current year census 
+select v_gender, count(*)
+from voters
+group by v_gender;
+declare
+male integer;
+female integer;
+per float;
+Census_For_male integer;
+Census_for_female integer;
+cm float;
+cf float;
+total float;
+ltotal float;
+begin
+male:=&male;
+female:=&female;
+census_For_male:=&census_For_male;
+census_For_female:=&census_For_female;
+cm:=male/census_For_male;
+dbms_output.put_line('Calculated Census of Male:'||cm);
+cf:=female/census_For_female;
+dbms_output.put_line('Calculated Census of Female:'||cf);
+total:=cm+cf;
+dbms_output.put_line('Total Calculated Census:'||total);
+ltotal:=census_for_male+census_for_female;
+dbms_output.put_line('Total census of current year:'||ltotal);
+per:=(total/ltotal)*1000;
+dbms_output.put_line('Total Percentage:'||per);
+end;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
