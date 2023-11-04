@@ -6,6 +6,6 @@ Creating and Querying into DB -> DBMS
 DB used - Oracle
 
 
-Given below is a glimpse of all the pages in PDF Format
+Given below is a glimpse of the FIGMA Prototype:
 
-[ONLINE VOTING MANAGEMENT SYSTEM.pdf](https://github.com/shreyapandey970/Online-Voting-Portal-Prototype/files/13256331/ONLINE.VOTING.MANAGEMENT.SYSTEM.pdf)
+https://www.figma.com/file/4SE7fG5coHh1WCKSYhCLik/ONLINE-VOTING-MANAGEMENT-SYSTEM?type=design&node-id=0-1&mode=design&t=wI9zeFJXwdov5Blu-0
