@@ -3,7 +3,7 @@
 Prototyping Tool used - FIGMA
 
 Creating and Querying into DB -> DBMS
-DB used - MySQL
+DB used - Oracle
 
 
 Given below is a glimpse of all the pages in PDF Format
